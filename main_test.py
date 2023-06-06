@@ -1,6 +1,7 @@
 class Test:
 
     def calculate(myCondition: str) -> None:
+        
         resCondition = []
         n = 0
 
@@ -80,7 +81,11 @@ print(chooseFunc)
 print(condition)
 
 if hasattr(Test, chooseFunc[0]):
-    Test.myPrint(condition)
-    print('True')
+    if chooseFunc[0] == Test.calculate.__name__:
+        Test.calculate(condition)
+        print('True')
+    if chooseFunc[0] == Test.myPrint.__name__:
+        Test.myPrint(condition)
+        print('True')
 else:
     print('False')
