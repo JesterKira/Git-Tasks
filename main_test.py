@@ -1,7 +1,10 @@
+import sys
+
+
 class Test:
 
     def calculate(myCondition: str) -> None:
-        
+
         resCondition = []
         n = 0
 
@@ -74,18 +77,28 @@ class Test:
         return print(string)
 
 
-chooseFunc = input('').replace(' ', '').split('(', maxsplit=1)
-condition = str(chooseFunc[1]).replace('(', '').replace(')', '')
+def checkStartParams():
+    if len(sys.argv) > 1:
+        if sys.argv[1] == Test.calculate.__name__:
+            Test.calculate(sys.argv[2])
+        if sys.argv[1] == Test.myPrint.__name__:
+            Test.myPrint(sys.argv[2])
+    else:
+        chooseFunc = input('').replace(' ', '').split('(', maxsplit=1)
+        condition = str(chooseFunc[1]).replace('(', '').replace(')', '')
 
-print(chooseFunc)
-print(condition)
+        print(chooseFunc)
+        print(condition)
 
-if hasattr(Test, chooseFunc[0]):
-    if chooseFunc[0] == Test.calculate.__name__:
-        Test.calculate(condition)
-        print('True')
-    if chooseFunc[0] == Test.myPrint.__name__:
-        Test.myPrint(condition)
-        print('True')
-else:
-    print('False')
+        if hasattr(Test, chooseFunc[0]):
+            if chooseFunc[0] == Test.calculate.__name__:
+                Test.calculate(condition)
+                print('True')
+            if chooseFunc[0] == Test.myPrint.__name__:
+                Test.myPrint(condition)
+                print('True')
+        else:
+            print('False')
+
+
+checkStartParams()
